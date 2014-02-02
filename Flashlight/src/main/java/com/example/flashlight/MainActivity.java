@@ -37,8 +37,25 @@ public class MainActivity extends ActionBarActivity {
         surfText = new SurfaceTexture(0);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        turnLightOn();
+    }
+
+
     public void onClickFlash(View view) {
-        if (cam == null) {
+        if (null == cam) {
+            turnLightOn();
+        }
+        else {
+            turnLightOff();
+        }
+    }
+
+    public void turnLightOn() {
+        if (null == cam) {
             cam = Camera.open();
             try {
                 cam.setPreviewTexture(surfText);
@@ -50,7 +67,10 @@ public class MainActivity extends ActionBarActivity {
             params.setFlashMode(Parameters.FLASH_MODE_TORCH);
             cam.setParameters(params);
         }
-        else {
+    }
+
+    public void turnLightOff() {
+        if (null != cam) {
             params.setFlashMode(Parameters.FLASH_MODE_OFF);
             cam.setParameters(params);
             cam.release();

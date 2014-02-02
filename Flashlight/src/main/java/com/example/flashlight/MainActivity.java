@@ -1,26 +1,16 @@
 package com.example.flashlight;
 
 import android.graphics.SurfaceTexture;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.graphics.SurfaceTexture;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
-import android.widget.Button;
-import android.view.View.OnClickListener;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 
 import java.io.IOException;
 
@@ -28,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
 
     Camera cam = null;
     Parameters params;
+    SurfaceTexture surfText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +33,14 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        surfText = new SurfaceTexture(0);
     }
 
     public void onClickFlash(View view) {
         if (cam == null) {
-            Log.w("Message", "Flash on");
             cam = Camera.open();
             try {
-                SurfaceTexture surfText = new SurfaceTexture(0);
                 cam.setPreviewTexture(surfText);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,7 +51,6 @@ public class MainActivity extends ActionBarActivity {
             cam.setParameters(params);
         }
         else {
-            Log.w("Message", "Flash off");
             params.setFlashMode(Parameters.FLASH_MODE_OFF);
             cam.setParameters(params);
             cam.release();

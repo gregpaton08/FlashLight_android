@@ -1,5 +1,6 @@
 package com.example.flashlight;
 
+import android.graphics.SurfaceTexture;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.graphics.SurfaceTexture;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
@@ -15,6 +19,8 @@ import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+
+import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -33,12 +39,12 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
-        cam = Camera.open();
-        params = cam.getParameters();
-        params.setFlashMode(Parameters.FLASH_MODE_TORCH);
-        cam.setParameters(params);
-        cam.startPreview();
-        Log.w("Message", "Flash on");
+//        cam = Camera.open();
+//        params = cam.getParameters();
+//        params.setFlashMode(Parameters.FLASH_MODE_TORCH);
+//        cam.setParameters(params);
+//        cam.startPreview();
+//        Log.w("Message", "Flash on");
     }
 
 
@@ -90,6 +96,13 @@ public class MainActivity extends ActionBarActivity {
         if (cam == null) {
             Log.w("Message", "Flash on");
             cam = Camera.open();
+            try {
+                SurfaceTexture surfText = new SurfaceTexture(0);
+                cam.setPreviewTexture(surfText);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            cam.startPreview();
             params = cam.getParameters();
             params.setFlashMode(Parameters.FLASH_MODE_TORCH);
             cam.setParameters(params);

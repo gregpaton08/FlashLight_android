@@ -14,6 +14,7 @@
         android:layout_height="wrap_content" />
 
     <SurfaceView
+        android:id="@+id/surfaceView1"
         android:layout_height="1dp"
         android:layout_width="1dp" />
 

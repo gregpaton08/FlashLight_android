@@ -19,6 +19,8 @@ import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.io.IOException;
 
@@ -30,6 +32,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Hide title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -48,50 +53,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        Log.w("Message", "Options Menu");
+//        return true;
+//    }
 
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        Log.w("Message", "Options Menu");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        Log.w("Message", "Options Created");
-//        if (true) {
-//            Log.w("Message", "true");
-//            Camera cam = Camera.open();
-//            Parameters p = cam.getParameters();
-//            if (p.getFlashMode() == Parameters.FLASH_MODE_TORCH) {
-//                Log.w("Message", "Flash off");
-//                p.setFlashMode(Parameters.FLASH_MODE_OFF);
-//                cam.setParameters(p);
-//                cam.stopPreview();
-//            }
-//            else {
-//                Log.w("Message", "Flash on");
-//                p.setFlashMode(Parameters.FLASH_MODE_TORCH);
-//                cam.setParameters(p);
-//                cam.startPreview();
-//            }
-//            //cam.release();
-//        }
-//        else {
-//            Log.w("Message", "Flash not supported");
-//        }
-//        switch (item.getItemId()) {
-//            case R.id.action_settings:
-//                return true;
-//        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    //@Override
     public void onClickFlash(View view) {
         if (cam == null) {
             Log.w("Message", "Flash on");

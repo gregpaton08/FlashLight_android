@@ -28,7 +28,6 @@ public class MainActivity extends ActionBarActivity {
 
     Camera cam = null;
     Parameters params;
-    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +42,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
-//        cam = Camera.open();
-//        params = cam.getParameters();
-//        params.setFlashMode(Parameters.FLASH_MODE_TORCH);
-//        cam.setParameters(params);
-//        cam.startPreview();
-//        Log.w("Message", "Flash on");
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        Log.w("Message", "Options Menu");
-//        return true;
-//    }
 
     public void onClickFlash(View view) {
         if (cam == null) {
@@ -76,7 +58,6 @@ public class MainActivity extends ActionBarActivity {
             params = cam.getParameters();
             params.setFlashMode(Parameters.FLASH_MODE_TORCH);
             cam.setParameters(params);
-            //FlashLightControl.setText("Set FLASH_MODE_OFF");
         }
         else {
             Log.w("Message", "Flash off");
@@ -84,7 +65,6 @@ public class MainActivity extends ActionBarActivity {
             cam.setParameters(params);
             cam.release();
             cam = null;
-            //FlashLightControl.setText("Set FLASH_MODE_TORCH");
         }
     }
 
